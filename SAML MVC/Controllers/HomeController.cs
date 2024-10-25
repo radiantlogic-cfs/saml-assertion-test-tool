@@ -5,21 +5,14 @@ namespace SAML_MVC.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly IConfiguration _configuration;
-
-    public HomeController(IConfiguration configuration)
+    public Task<IActionResult> Index()
     {
-        _configuration = configuration;
-    }
-
-    public async Task<IActionResult> Index()
-    {
-        return View();
+        return Task.FromResult<IActionResult>(View());
     }
 
     [Authorize]
     public IActionResult Dashboard()
     {
-        return View();
+        return Accepted();
     }
 }
