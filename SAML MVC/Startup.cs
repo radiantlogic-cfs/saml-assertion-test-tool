@@ -27,6 +27,7 @@ namespace SAML_MVC
                 saml2Configuration.SigningCertificate =
                     CertificateUtil.Load(AppEnvironment.MapToPhysicalFilePath(Configuration["auth:saml2:SigningCertificateFile"]),
                         Configuration["auth:saml2:SigningCertificatePassword"], X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
+                saml2Configuration.Issuer = Configuration["auth:saml2:Issuer"];
                 saml2Configuration.AllowedAudienceUris.Add(saml2Configuration.Issuer);
 
                 saml2Configuration.AllowedIssuer = Configuration["auth:saml2:Issuer"];

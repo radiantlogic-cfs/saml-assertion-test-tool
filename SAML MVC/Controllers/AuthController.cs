@@ -13,7 +13,7 @@ namespace SAML_MVC.Controllers;
 public class AuthController : Controller
 {
     private IConfiguration Configuration { get; }
-    private const string RelayStateReturnUrl = "ReturnUrl";
+    private const string RelayStateReturnUrl = "/Home/Dashboard";
     private readonly Saml2Configuration config;
 
     public AuthController(Saml2Configuration config, IConfiguration configuration)
@@ -39,23 +39,6 @@ public class AuthController : Controller
             {
                 Comparison = AuthnContextComparisonTypes.Minimum,
                 AuthnContextClassRef = [AuthnContextClassTypes.PasswordProtectedTransport.OriginalString],
-            },
-            Scoping = new Scoping
-            {
-                IDPList = new IDPList
-                {
-                    IDPEntry =
-                    [
-                        new IDPEntry
-                        {
-                            ProviderID = "https://qaz.org",
-                            Name = "xxx",
-                            Loc = "https://wsx.org"
-                        }
-                    ],
-                    GetComplete = "xxx"
-                },
-                RequesterID = ["https://xyz.org"]
             }
         }).ToActionResult();
     }
@@ -72,7 +55,7 @@ public class AuthController : Controller
             throw new AuthenticationException($"SAML Response status: {saml2AuthnResponse.Status}");
         }
 
-        httpRequest.Binding.Unbind(httpRequest, saml2AuthnResponse);
+        // httpRequest.Binding.Unbind(httpRequest, saml2AuthnResponse);
         await saml2AuthnResponse.CreateSession(HttpContext, claimsTransform: (claimsPrincipal) => ClaimsTransform.Transform(claimsPrincipal));
 
         var relayStateQuery = httpRequest.Binding.GetRelayStateQuery();
