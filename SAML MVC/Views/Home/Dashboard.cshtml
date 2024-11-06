@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h3>Hi, @User.Identity!.Name</h3>
+<div>
+    <a asp-controller="Auth" asp-action="Logout">Logout</a>
+</div>
+
+<p>This is a secure dashboard. You have the following claims:</p>
+<dl>
+    @foreach (var claim in User.Claims)
+    {
+        <dt>@claim.Type</dt>
+        <dd>@claim.Value</dd>
+    }
+</dl>

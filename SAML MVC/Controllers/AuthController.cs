@@ -59,7 +59,7 @@ public class AuthController : Controller
         await saml2AuthnResponse.CreateSession(HttpContext, claimsTransform: (claimsPrincipal) => ClaimsTransform.Transform(claimsPrincipal));
 
         var relayStateQuery = httpRequest.Binding.GetRelayStateQuery();
-        var returnUrl = relayStateQuery.ContainsKey(RelayStateReturnUrl) ? relayStateQuery[RelayStateReturnUrl] : Url.Content("~/");
+        var returnUrl = relayStateQuery.TryGetValue(RelayStateReturnUrl, out var value) ? value : Url.Content("~/");
         return Redirect(returnUrl);
     }
 }

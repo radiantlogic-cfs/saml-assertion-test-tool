@@ -5,14 +5,14 @@ namespace SAML_MVC.Controllers;
 
 public class HomeController : Controller
 {
-    public Task<IActionResult> Index()
+    public IActionResult Index()
     {
-        return Task.FromResult<IActionResult>(View());
+        return View();
     }
 
     [Authorize]
     public IActionResult Dashboard()
     {
-        return Accepted();
+        return View();
     }
 }
