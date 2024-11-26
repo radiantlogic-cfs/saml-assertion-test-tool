@@ -1,49 +1,57 @@
-using System.Security.Cryptography.X509Certificates;
 using ITfoxtec.Identity.Saml2;
 using ITfoxtec.Identity.Saml2.MvcCore;
 using ITfoxtec.Identity.Saml2.MvcCore.Configuration;
-using ITfoxtec.Identity.Saml2.Util;
+using ITfoxtec.Identity.Saml2.Schemas.Metadata;
 using Microsoft.IdentityModel.Logging;
 
 namespace SAML_MVC
 {
     public class Startup
     {
-        public static IWebHostEnvironment AppEnvironment { get; private set; }
-        public Startup(IWebHostEnvironment env, IConfiguration configuration)
+        public Startup(IConfiguration configuration)
         {
-            AppEnvironment = env;
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             IdentityModelEventSource.ShowPII = true;
 
-            services.BindConfig<Saml2Configuration>(Configuration, "Saml2", (_, saml2Configuration) =>
+            services.BindConfig<Saml2Configuration>(Configuration, "auth:saml2", (serviceProvider, saml2Configuration) =>
             {
-                saml2Configuration.SigningCertificate =
-                    CertificateUtil.Load(AppEnvironment.MapToPhysicalFilePath(Configuration["auth:saml2:SigningCertificateFile"]),
-                        Configuration["auth:saml2:SigningCertificatePassword"], X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
-                saml2Configuration.Issuer = Configuration["auth:saml2:Issuer"];
                 saml2Configuration.AllowedAudienceUris.Add(saml2Configuration.Issuer);
-
-                saml2Configuration.AllowedIssuer = Configuration["auth:saml2:Issuer"];
-                saml2Configuration.SingleSignOnDestination = new Uri(Configuration["auth:saml2:SingleSignOnDestination"] + "/" + Configuration["auth:saml2:Tenant"] + "/" + Configuration["auth:saml2:ApplicationID"]);
-                saml2Configuration.SingleLogoutDestination = new Uri(Configuration["auth:saml2:SingleLogoutDestination"]!);
-                if (saml2Configuration.SigningCertificate.IsValidLocalTime())
+                
+                var httpClientFactory = serviceProvider.GetService<IHttpClientFactory>();
+                var entityDescriptor = new EntityDescriptor();
+                entityDescriptor.ReadIdPSsoDescriptorFromUrlAsync(httpClientFactory, new Uri(Configuration["auth:saml2:IdPMetadata"]!)).GetAwaiter().GetResult();
+                if (entityDescriptor.IdPSsoDescriptor != null)
                 {
-                    saml2Configuration.SignatureValidationCertificates.Add(saml2Configuration.SigningCertificate);
+                    saml2Configuration.AllowedIssuer = entityDescriptor.EntityId;
+                    saml2Configuration.SingleSignOnDestination = entityDescriptor.IdPSsoDescriptor.SingleSignOnServices.First().Location;
+                    saml2Configuration.SingleLogoutDestination = entityDescriptor.IdPSsoDescriptor.SingleLogoutServices.First().Location;
+                    foreach (var signingCertificate in entityDescriptor.IdPSsoDescriptor.SigningCertificates)
+                    {
+                        if (signingCertificate.IsValidLocalTime())
+                        {
+                            saml2Configuration.SignatureValidationCertificates.Add(signingCertificate);
+                        }
+                    }
+                    if (saml2Configuration.SignatureValidationCertificates.Count <= 0)
+                    {
+                        throw new Exception("IdP signing certificates are expired.");
+                    }
+                    if (entityDescriptor.IdPSsoDescriptor.WantAuthnRequestsSigned.HasValue)
+                    {
+                        saml2Configuration.SignAuthnRequest = entityDescriptor.IdPSsoDescriptor.WantAuthnRequestsSigned.Value;
+                    }
                 }
                 else
                 {
-                    throw new Exception("The IdP signing certificates is expired.");
+                    throw new Exception("IdP Metadata was not properly loaded.");
                 }
-
-                saml2Configuration.SignAuthnRequest = false;
-
+            
                 return saml2Configuration;
             });
 
