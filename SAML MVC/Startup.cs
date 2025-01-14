@@ -71,6 +71,17 @@ namespace SAML_MVC
 
             app.UseSaml2();
             app.UseAuthorization();
+            
+            app.Use(async (context, next) =>
+            {
+                if (context.User.Identity is { IsAuthenticated: true } && context.Request.Path == "/")
+                {
+                    context.Response.Redirect("/Home/Dashboard");
+                    return;
+                }
+
+                await next();
+            });
 
             app.UseEndpoints(endpoints =>
             {
