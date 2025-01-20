@@ -1,4 +1,23 @@
 # SAML Client
+
+## CFS Configuration
+Create a Generic SAML application in CFS:
+
+- add `https://localhost:44305/` as an `Audience`;
+- set `https://localhost:44305/Auth/AssertionConsumerService` as the `Recipient`
+
+## App Configuration
+Open your web application in Visual Studio and open the file `appsettings.json` at the root of the web application. Locate the `auth:saml` section.
+
+- replace the value for `Tenant` with your _Tenant name_ from CFS;
+- replace the value for `ApplicationID` with your _Application ID_ from CFS;
+- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://localhost:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`).
+
+![CFS OAuth application](SAML%20MVC/Docs/Resources/Images/cfs-saml-application.png)
+
+![CFS OAuth Authority.png](SAML%20MVC/Docs/Resources/Images/cfs-saml-metadata.png)
+
+
 ## Preview
 
 Sample SAML client application using .NET 8 & [ITFoxtec Identity SAML2](https://github.com/ITfoxtec/ITfoxtec.Identity.Saml2).
@@ -13,22 +32,5 @@ After logging in to the OP and authorizing the application, we will be redirecte
 
 ![Dashboard page](SAML%20MVC/Docs/Resources/Images/dashboard.png)
 
-From the Dashboard we can Logout, which will end the session here at the RP, and then will redirect to the OP's `endsesion`
+From the Dashboard we can Logout, which will end the session here at the RP, and then will redirect to the OP's `logout`
 endpoint.
-
-## Configuration
-
-Create a Generic SAML application in CFS:
-
-- add `https://localhost:44305/` as an `Audience`;
-- set `https://localhost:44305/Auth/AssertionConsumerService` as the `Recipient`
-
-Open your web application in Visual Studio and open the file `appsettings.json` at the root of the web application. Locate the `auth:saml` section.
-
-- replace the value for `Tenant` with your _Tenant name_ from CFS;
-- replace the value for `ApplicationID` with your _Application ID_ from CFS;
-- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://localhost:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`).
-
-![CFS OAuth application](SAML%20MVC/Docs/Resources/Images/cfs-saml-application.png)
-
-![CFS OAuth Authority.png](SAML%20MVC/Docs/Resources/Images/cfs-saml-metadata.png)
