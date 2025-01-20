@@ -5,7 +5,8 @@
 
 <h3>Hi, @User.Identity!.Name</h3>
 <div>
-    <a asp-controller="Auth" asp-action="Logout">Logout</a>
+    <a asp-controller="Auth" asp-action="Logout" asp-route-sendSessionIndex="1">Logout with SessionIndex</a><br/>
+    <a asp-controller="Auth" asp-action="Logout" asp-route-sendSessionIndex="0">Logout without SessionIndex</a>
 </div>
 
 <p>This is a secure dashboard. You have the following claims:</p>

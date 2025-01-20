@@ -62,7 +62,7 @@ public class AuthController : Controller
     }
     
     [Route("Logout")]
-    public async Task<IActionResult> Logout()
+    public async Task<IActionResult> Logout(int sendSessionIndex)
     {
         if (User.Identity is not { IsAuthenticated: true })
         {
@@ -71,6 +71,10 @@ public class AuthController : Controller
     
         var binding = new Saml2PostBinding();
         var saml2LogoutRequest = await new Saml2LogoutRequest(config, User).DeleteSession(HttpContext);
+        if (sendSessionIndex == 0)
+        {
+            saml2LogoutRequest.SessionIndex = null;
+        }
         return binding.Bind(saml2LogoutRequest).ToActionResult();
     }
 }
