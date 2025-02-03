@@ -3,15 +3,15 @@
 ## CFS Configuration
 Create a Generic SAML application in CFS:
 
-- add `https://localhost:44305/` as an `Audience`;
-- set `https://localhost:44305/Auth/AssertionConsumerService` as the `Recipient`
+- add `https://myapp:44305/` as an `Audience`;
+- set `https://myapp:44305/Auth/AssertionConsumerService` as the `Recipient`
 
 ## App Configuration (with an IDE)
 Open your web application in Visual Studio and open the file `appsettings.json` at the root of the web application. Locate the `auth:saml` section.
 
 - replace the value for `Tenant` with your _Tenant name_ from CFS;
 - replace the value for `ApplicationID` with your _Application ID_ from CFS;
-- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://localhost:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`).
+- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://cfs-master:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`).
 
 ![CFS OAuth application](SAML%20MVC/Docs/Resources/Images/cfs-saml-application.png)
 
@@ -22,7 +22,7 @@ Go to the folder where the application source is located and go to the `SAML MVC
 
 - replace the value for `Tenant` with your _Tenant name_ from CFS;
 - replace the value for `ApplicationID` with your _Application ID_ from CFS;
-- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://localhost:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`).
+- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://cfs-master:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`).
 
 Run the `SAML MVC.exe` executable.
 
