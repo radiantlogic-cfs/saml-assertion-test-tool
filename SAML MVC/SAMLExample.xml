@@ -1,0 +1,58 @@
+<Response  xmlns="urn:oasis:names:tc:SAML:2.0:protocol"
+                      ID="_d2831a3141fd4a9198b7be557a5198e2"
+                      IssueInstant="2024-10-21T12:47:18Z"
+                      Version="2.0"
+                      Destination="https://www.dropbox.com/saml_login"
+                     >
+        <Issuer  xmlns="urn:oasis:names:tc:SAML:2.0:assertion">https://www.dropbox.com/saml_login</Issuer>
+        <Status>
+                <StatusCode  Value="urn:oasis:names:tc:SAML:2.0:status:Success" />
+        </Status>
+        <Assertion  xmlns="urn:oasis:names:tc:SAML:2.0:assertion"
+                                ID="_2fc95d089a74491ca3537d360c239298"
+                                IssueInstant="2024-10-21T12:47:18Z"
+                                Version="2.0"
+                               >
+                <Issuer>https://www.dropbox.com/saml_login</Issuer>
+                <Signature  xmlns="http://www.w3.org/2000/09/xmldsig#">
+                        <SignedInfo>
+                                <CanonicalizationMethod  Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+                                <SignatureMethod  Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
+                                <Reference  URI="#_2fc95d089a74491ca3537d360c239298">
+                                        <Transforms>
+                                                <Transform  Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                                                <Transform  Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+                                        </Transforms>
+                                        <DigestMethod  Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+                                        <DigestValue>M4WQo7m+0q7/WS8b+2pPtWNEzbNafZAQ3Far+O5iQoA=</DigestValue>
+                                </Reference>
+                        </SignedInfo>
+                        <SignatureValue>Tf4w2WlWmXs+uetFbP7LB/55yy6HYScLzeoc5CUVbHfwxXni940thT+8hGG6HpDc6m64HlWkh1mtqxbQVtbPRQQNWGOozotGdgm1Gv8ZtTnOUrzECS/cJtcSnD2OblN9lCYRaoZ83hCHBNotgBZ61N9uICbR6wcQ2w+3hpt3iOMIlZBMhyrKtS8cw27XgMq8My6y1fIPnV+898b4ItqeCn23cSbF9wC12qNSc1NPaKdorEFsdHuwqRCeVibNfhcNyCjhFHdtNn1hcIdtQd+3k8DXdKXIKlkg6mzfCRTO0U1I8QM/sogEsSnzLe7s+AWgOgJ4nS0OT3cs34K4gwUzaA==</SignatureValue>
+                        <KeyInfo>
+                                <X509Data>
+                                        <X509Certificate>MIIDCDCCAfCgAwIBAgIIO+L6IIQOHtQwDQYJKoZIhvcNAQELBQAwADAeFw0yNDEwMTgxMzI5MDBaFw0yNTEwMTgxMzI5MDBaMAAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCdMrEH3e7B8EsFCYYgngTczHI3YeOXWGIko1oYmqK4/IxLfO9qxDCd1kVfcBteSZpTPIF4iSlZP2QlwIHdDOayEQtFM6EBbJAIoviJ2Ekr8Zf0waGhX5tUIVe005GcIubKRWx6ZVkVMmlZCoDuHBwxCmua+EA0J97vkVpDNzRZY+K8lu7Q6jCPGAQ+sqExkO3cBdZ8vnbK5uNs6ZJGsE+NBhUfWGW9Jb7ORjdUm5ZpMBnnNfce14qKHGYPpKqRaV+Fb7A3ErLzfPqAND/y8cDkSEZFUdAeSC+nszGjm5AVb4lLHFTtsb/83/IjuCgLZP/3tFFEdnuBO8xqz6Ke2H9VAgMBAAGjgYUwgYIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUiQJeIaGNicAUIrA5fEjdiNB3sDcwCwYDVR0PBAQDAgO4MBMGA1UdJQQMMAoGCCsGAQUFBwMCMBEGCWCGSAGG+EIBAQQEAwIFoDAeBglghkgBhvhCAQ0EERYPeGNhIGNlcnRpZmljYXRlMA0GCSqGSIb3DQEBCwUAA4IBAQA1Dfp7hNvp5F/qk8PMilLTzVeeL6K2Dx6IKKwEbxOiZLCwmJ0cbokUf+9KE0Csdj3YhGwDRmOjmHGwENfQtE1haFh6bqgNS8Lp1pXUN2stzlHDAXwfYZ7OHqOWNfjrI56Ala7cGHoRDHrCvjg456WqD81Rl021iTSCGhoOz1kXbH/Bh0b4R3zXcSFsWgkIHtzOcC7aWPiE/ilRWLir4ScwvOtpNlUwDF8NBuIGF64ebHJ20I6G+Dgbybh8Ce0KdoHkWcjnV7WtHyqWN1mw7KYsYEWouG/55JeTe602/evIvbXdx4Ugyz0GVGAFLehD2J2W2uV71TPwffXiCc7XLNId</X509Certificate>
+                                </X509Data>
+                        </KeyInfo>
+                </Signature>
+                <Subject>
+                        <NameID  Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">andrei.cirstea@ensemble.com</NameID>
+                        <SubjectConfirmation  Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+                                <SubjectConfirmationData  Recipient="https://www.dropbox.com/saml_login"
+                                                                                    NotOnOrAfter="2024-10-21T12:57:18Z"
+                                                                                   />
+                        </SubjectConfirmation>
+                </Subject>
+                <Conditions  NotBefore="2024-10-21T12:42:18Z"
+                                          NotOnOrAfter="2024-10-21T12:57:18Z"
+                                         >
+                        <AudienceRestriction>
+                                <Audience>https://www.dropbox.com/saml_login</Audience>
+                        </AudienceRestriction>
+                </Conditions>
+                <AuthnStatement  AuthnInstant="2024-10-21T12:47:18Z">
+                        <AuthnContext>
+                                <AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport</AuthnContextClassRef>
+                        </AuthnContext>
+                </AuthnStatement>
+        </Assertion>
+</Response>
