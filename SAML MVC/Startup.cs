@@ -65,6 +65,7 @@ namespace SAML_MVC
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
