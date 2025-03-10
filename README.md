@@ -11,7 +11,9 @@ Open your web application in Visual Studio and open the file `appsettings.json` 
 
 - replace the value for `Tenant` with your _Tenant name_ from CFS;
 - replace the value for `ApplicationID` with your _Application ID_ from CFS;
-- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://cfs-master:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`).
+- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://cfs-master:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`);
+- replace the value for `Issuer` with the _Application URL_ (`https://myapp:44305/`);
+- replace the value for `AssertionConsumerServiceUrl` with the _Application Consumer Service URL_ (`https://myapp:44305/Saml2/Auth/AssertionConsumerService`).
 
 ![CFS OAuth application](SAML%20MVC/Docs/Resources/Images/cfs-saml-application.png)
 
@@ -22,7 +24,9 @@ Go to the folder where the application source is located and go to the `SAML MVC
 
 - replace the value for `Tenant` with your _Tenant name_ from CFS;
 - replace the value for `ApplicationID` with your _Application ID_ from CFS;
-- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://cfs-master:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`).
+- replace the value for `IdPMetadata` with the _Metadata URL_ from CFS. (`https://cfs-master:44303/Trust/FederationMetadata?tenant={tenant}&application={appid}`);
+- replace the value for `Issuer` with the _Application URL_ (`https://myapp:44305/`);
+- replace the value for `AssertionConsumerServiceUrl` with the _Application Consumer Service URL_ (`https://myapp:44305/Saml2/Auth/AssertionConsumerService`).
 
 Open Internet Information Services (IIS) Manager. Right click on _Sites_ and select _Add Website_.
 
